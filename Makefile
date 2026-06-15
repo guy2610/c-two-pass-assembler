@@ -9,6 +9,8 @@ ASAN_TARGET := assembler_asan
 TEST_INPUT := tests/inputs/progInput
 EXPECTED_OB := tests/expected/progInput.ob
 GENERATED_OB := tests/inputs/progInput.ob
+EXPECTED_ENT := tests/expected/progInput.ent
+GENERATED_ENT := tests/inputs/progInput.ent
 
 .PHONY: all asan test test-asan clean
 
@@ -24,11 +26,13 @@ test: $(TARGET)
 	./$(TARGET) $(TEST_INPUT)
 	@echo
 	diff -u $(EXPECTED_OB) $(GENERATED_OB)
+	diff -u $(EXPECTED_ENT) $(GENERATED_ENT)
 
 test-asan: asan
 	./$(ASAN_TARGET) $(TEST_INPUT)
 	@echo
 	diff -u $(EXPECTED_OB) $(GENERATED_OB)
+	diff -u $(EXPECTED_ENT) $(GENERATED_ENT)
 
 clean:
 	rm -f $(TARGET) $(ASAN_TARGET)
