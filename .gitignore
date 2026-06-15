@@ -23,3 +23,13 @@ tmp/
 # Local binaries
 assembler
 assembler_asan
+
+# Generated assembler outputs
+*.ob
+*.ent
+*.ext
+
+# Keep golden expected outputs
+!tests/expected/*.ob
+!tests/expected/*.ent
+!tests/expected/*.ext
