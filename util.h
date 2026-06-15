@@ -20,8 +20,8 @@ void registerCod(char* code, registers* reg);/*this function checks if it is a r
 void numberCod(char *num, char *binary);/*this function gets a number in string and return the binary code in string format*/
 addres_type  addressing_type(lbl *head,char* num);/*this function gets the head of the label list and a string and return the right addressing type*/
 void op_funct_code(char* key, opcode* op, funct* fun);/*this function gets string and puts the opcode value and funct value in the pointers*/
-void data_free_arr();/*this function free the dynamic memory in the data array*/
-void cmd_free_arr();/*this function free the dynamic memory in the command array*/
+void data_free_arr(void);/*this function free the dynamic memory in the data array*/
+void cmd_free_arr(void);/*this function free the dynamic memory in the command array*/
 void label_free(lbl *head);/*this function free the dynamic memory of the label list*/
 char *intToString(int k);/*this function gets a integer and returns in string format*/
 Bool checkingEntry(lbl *head);/*this function gets the head of the label list and return if there is word with entry attribute*/

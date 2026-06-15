@@ -349,7 +349,7 @@ void op_funct_code(char* key, opcode* op, funct* fun)
 		}
 	}
 }
-void data_free_arr()
+void data_free_arr(void)
 {
     int c=0;
     while(c<MAX_ARR_LEN)
@@ -358,7 +358,7 @@ void data_free_arr()
         c++;
     }
 }
-void cmd_free_arr()
+void cmd_free_arr(void)
 {
     int c=0;
     while(c<MAX_ARR_LEN)

@@ -40,7 +40,7 @@ void cmd_input_arr(Wrd word_in, char tag_in, int* IC)
 	(*IC) = ((*IC)+1);
 
 }
-void init_cmd_array()
+void init_cmd_array(void)
 {
 	int i, j;
 	i = j = 0;
@@ -56,7 +56,7 @@ void init_cmd_array()
 
 }
 
-void init_data_array()
+void init_data_array(void)
 {
 	int i, j;
 	i = j = 0;

@@ -12,7 +12,7 @@ Data data_arr[MAX_ARR_LEN];
 
 void data_input_arr(Wrd , int* );/*this function input to the data array*/
 void cmd_input_arr(Wrd , char , int* );/*this function input to the command array*/
-void init_cmd_array();/*this function initialize command array*/
-void init_data_array();/*this function initialize data array*/
+void init_cmd_array(void);/*this function initialize command array*/
+void init_data_array(void);/*this function initialize data array*/
 Wrd* cmd_builder(opcode  , funct , addres_type , addres_type );/*this function builds a word*/
 
