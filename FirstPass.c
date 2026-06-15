@@ -163,7 +163,9 @@ lblb proceesLine(line currLine, int* DC, int* IC, lbl* head)
         return bhead;
 
 	}
-
+    bhead.head = head;
+    bhead.b = F;
+    return bhead;
 }
 Bool processString(line lineString, int i, int* DC)
 {
@@ -217,14 +219,13 @@ Bool processString(line lineString, int i, int* DC)
 }
 Bool dataProcessing(line lineData, int* DC, int i)
 {
-	instruction instruc;
 	int j;
 	char temp[MAX_LINE_LENGTH];
 	i = moveToNotWhiteSpace(lineData, i);
 	if (lineData.info[i] != '.')
 	{
 
-		instruc = NONE;
+		return F;
 	}
 	else i += 1;
 	for (j = 0;lineData.info[i] && lineData.info[i] != ' ' && lineData.info[i] != '\n' && lineData.info[i] != '\t';i += 1, j += 1)
@@ -236,11 +237,7 @@ Bool dataProcessing(line lineData, int* DC, int i)
 		return processData(lineData, i, DC);
 	if (strcmp(temp, "string"))
 		return processString(lineData, i, DC);
-	if (strcmp(temp, "entry"))
-		instruc = ENTR;
-	if (strcmp(temp, "extern"))
-		instruc = EXTERN;
-	else  instruc = ERROR_INST;
+	return T;
 
 
 }
@@ -281,7 +278,6 @@ Bool processData(line lineData, int i, int* DC)
 		printf("Expected integer for .data instruction\n");
 		return F;
 	}
-	temp='\0';
 	free(number);
 	return T;
 }
@@ -375,4 +371,5 @@ Bool codeProcessing(line lineCode,lbl *head, int i, int* IC)
         return T;
 	}
 
+	return F;
 }
