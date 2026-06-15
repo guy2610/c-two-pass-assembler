@@ -29,7 +29,7 @@ int moveToNotWhiteSpace(line l, int i)
 int countOperands(line l, int i)
 {
 	int count = 0;
-	while (i<80&&i<(strlen(l.info)-1))
+	while (i < 80 && (size_t)i < strlen(l.info) - 1)
 	{
 		i = moveToNotWhiteSpace(l, i);
 		while (isspace(l.info[i]) == 0&&l.info[i] != ',')
@@ -192,7 +192,6 @@ void registerCod_bilder(char* code,Wrd* reg)
         i+=1;
     }
 	 i = code[1] - '0' ;
-	char c = code[2];
 	if (code[0] == 'r' && ((code[1]-'0' )>= 0 && (code[1] - '0') <= 7) && code[2] == '\0')
 	{
 
@@ -217,8 +216,6 @@ void registerCod_bilder(char* code,Wrd* reg)
 }
 void registerCod(char* code, registers* reg)
 {
-	int i = code[1] - '0' ;
-	char c = code[2];
 	if (code[0] == 'r' && ((code[1]-'0' )>= 0 && (code[1] - '0') <= 7) && code[2] == '\0')
 	{
 
@@ -337,7 +334,7 @@ addres_type  addressing_type(lbl* head,char* num)
 }
 void op_funct_code(char* key, opcode* op, funct* fun)
 {
-	int i;
+	size_t i;
 	*op = NONE_OP;
 	*fun = STOP_FUNCT;
 	for (i = 0; i < TABLE_SIZE; i++) {
