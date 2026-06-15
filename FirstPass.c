@@ -232,10 +232,10 @@ Bool dataProcessing(line lineData, int* DC, int i)
 	{
 		temp[j] = lineData.info[i];
 	}
-	temp[j] = '\n';
-	if (strcmp(temp, "data"))
+	temp[j] = '\0';
+	if (strcmp(temp, "data") == 0)
 		return processData(lineData, i, DC);
-	if (strcmp(temp, "string"))
+	if (strcmp(temp, "string") == 0)
 		return processString(lineData, i, DC);
 	return T;
 
