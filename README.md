@@ -139,6 +139,10 @@ The cleanup included:
 - Adding regression-test targets for object, entry, and external-symbol outputs
 - Removing compiler warnings under `-Wall -Wextra -pedantic`
 
+## Limitations
+
+This is an academic assembler implementation and not a production-grade assembler. The focus is on demonstrating parsing, two-pass symbol resolution, output generation, C memory management, and regression testing.
+
 ## Current Status
 
 The project currently builds successfully with:
