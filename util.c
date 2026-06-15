@@ -545,7 +545,6 @@ Bool is_instruction(char* str)
 
 void printing_to_files(char* fileName,lbl *head ,int ICF,int DCF)
 {
-    printf("IC:%d , DC:%d",ICF,DCF);
     FILE *obFile, *entFile, *extFile;
 	char *obFileName, *entFileName, *extFileName;
 	lbl *lblTmp;
