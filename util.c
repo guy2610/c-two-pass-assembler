@@ -8,6 +8,111 @@
 #include "util.h"
 #include "label.h"
 #include "data.h"
+
+typedef struct ExternalUseNode {
+    char symbol[MAX_LABEL_LEN + 1];
+    char address[5];
+    struct ExternalUseNode *next;
+} ExternalUseNode;
+
+static ExternalUseNode *externalUsesHead = NULL;
+static Bool collectExternalUses = F;
+
+void set_external_use_collection(Bool enabled)
+{
+    collectExternalUses = enabled;
+}
+
+static Bool external_use_exists(const char *symbol, const char *address)
+{
+    ExternalUseNode *curr = externalUsesHead;
+
+    while (curr != NULL)
+    {
+        if (strcmp(curr->symbol, symbol) == 0 && strcmp(curr->address, address) == 0)
+        {
+            return T;
+        }
+
+        curr = curr->next;
+    }
+
+    return F;
+}
+
+static void add_external_use(const char *symbol, const char *address)
+{
+    ExternalUseNode *node;
+    ExternalUseNode *curr;
+
+    if (external_use_exists(symbol, address) == T)
+    {
+        return;
+    }
+
+    node = malloc(sizeof(ExternalUseNode));
+    if (node == NULL)
+    {
+        return;
+    }
+
+    strncpy(node->symbol, symbol, MAX_LABEL_LEN);
+    node->symbol[MAX_LABEL_LEN] = '\0';
+
+    strncpy(node->address, address, 4);
+    node->address[4] = '\0';
+
+    node->next = NULL;
+
+    if (externalUsesHead == NULL)
+    {
+        externalUsesHead = node;
+        return;
+    }
+
+    curr = externalUsesHead;
+    while (curr->next != NULL)
+    {
+        curr = curr->next;
+    }
+
+    curr->next = node;
+}
+
+static Bool has_external_uses(void)
+{
+    return externalUsesHead != NULL ? T : F;
+}
+
+static void write_external_uses(FILE *extFile)
+{
+    ExternalUseNode *curr = externalUsesHead;
+
+    while (curr != NULL)
+    {
+        fputs(curr->symbol, extFile);
+        fputc(' ', extFile);
+        fputs(curr->address, extFile);
+        fputc('\n', extFile);
+
+        curr = curr->next;
+    }
+}
+
+static void free_external_uses(void)
+{
+    ExternalUseNode *curr = externalUsesHead;
+
+    while (curr != NULL)
+    {
+        ExternalUseNode *next = curr->next;
+        free(curr);
+        curr = next;
+    }
+
+    externalUsesHead = NULL;
+    collectExternalUses = F;
+}
 Bool ifItInt(char* string)
 {
 	int i = 0;
@@ -86,8 +191,16 @@ void extraWord(line lineCode,lbl *head, int i, int* IC)
 	}
 	if (dest_address == DIRECT)
 	{
+		int cmdIndex = (*IC) - IcStart;
+		lbl *externalLabel = label_search(head, tempExW);
+
 		newWord = (Wrd *)cmd_builder(MOV_OP, MOV_FUNCT, src_address, dest_address);
 		cmd_input_arr(*newWord, '?', IC);
+
+		if (collectExternalUses == T && externalLabel != NULL && externalLabel->attribute == EXTERNAL)
+		{
+			add_external_use(tempExW, cmd_arr[cmdIndex].address);
+		}
 	}
 	if (dest_address == IMMEDIATE)
 	{
@@ -490,25 +603,15 @@ void printing_to_files(char* fileName,lbl *head ,int ICF,int DCF)
 	   fclose(entFile);
 	   free(entFileName);
 	}
-	if(checkingExternal(head)==T)
+	if(has_external_uses()==T)
 	{
 	    extFileName=malloc(strlen(fileName) + strlen(".ext") + 1);
 	    strcpy(extFileName, fileName);
 	    strcat(extFileName,".ext");
 	    extFile=fopen(extFileName,"w");
-	    lblTmp=head;
-	    while(lblTmp!=NULL)
-	    {
-	     if(lblTmp->attribute==EXTERNAL)
-	     {
-	         fputs(lblTmp->symbole,extFile);
-	         fputc(' ',extFile);
-	         fputs(lblTmp->address,extFile);
-	         fputc('\n',extFile);
-	     }
-	     lblTmp=lblTmp->next;
-	    }
+	    write_external_uses(extFile);
 	    free(extFileName);
 	    fclose(extFile);
+	    free_external_uses();
 	}
 }

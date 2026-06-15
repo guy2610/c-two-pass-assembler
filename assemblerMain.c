@@ -90,6 +90,7 @@ if (succes==T)
         /*updateAdrressData(IC,DCF);
         updateAdrresslabel(ICF-100,bhead.head);*/
 
+        set_external_use_collection(T);
         rewind(currFile);
 		while (fgets(currLine.info, MAX_LINE_LENGTH + 1, currFile))
 		{

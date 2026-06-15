@@ -10,6 +10,7 @@ int moveToNotWhiteSpace(line , int );/*this function gets a line and an index an
 int countOperands(line , int );/*this function gets a line and an index after a known opcode and returns the number of the operands it has in the line*/
 Bool rightOperans(opcode , int );/*this function gets an opcode and the number of operands and returns a boolean if the number of operands is exactly the same as in the opcode's settings*/
 void extraWord(line ,lbl *head , int , int* );/*this function gets line, head of the label list, index in the line and IC and adds a word to the command's array*/
+void set_external_use_collection(Bool enabled);
 void bin(char* , int );/*this function gets a integer and return the binary number using a string*/
 int binToDecimal(char* );/*this function gets a binary number as a string and returns its decimal number as an integer format*/
 Bool is_instruction(char* str);/*this function gets a string and check if it is an opcode*/
