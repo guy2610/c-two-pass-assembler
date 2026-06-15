@@ -100,10 +100,12 @@ Run the golden-output regression test:
 make test
 ```
 
-The test builds the assembler, runs it on the sample input, and compares the generated object file against the expected output:
+The test builds the assembler, runs it on the sample input, and compares the generated object, entry, and external-symbol files against the expected outputs:
 
 ```bash
 diff -u tests/expected/progInput.ob tests/inputs/progInput.ob
+diff -u tests/expected/progInput.ent tests/inputs/progInput.ent
+diff -u tests/expected/progInput.ext tests/inputs/progInput.ext
 ```
 
 ## AddressSanitizer Test
@@ -134,7 +136,7 @@ The cleanup included:
 - Fixing output mismatches against a golden expected object file
 - Organizing sample input and expected output files
 - Adding a Makefile
-- Adding regression-test targets
+- Adding regression-test targets for object, entry, and external-symbol outputs
 - Removing compiler warnings under `-Wall -Wextra -pedantic`
 
 ## Current Status
