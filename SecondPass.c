@@ -13,6 +13,7 @@
 
 lblb SecondProceesLine(line currLine, int* DC, int* IC, lbl* head)
 {
+	(void)DC;
 	int i = 0;
 	int j;
 	lblb bhead;

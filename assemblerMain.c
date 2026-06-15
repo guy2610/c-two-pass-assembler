@@ -32,7 +32,7 @@ bool fileProcess(char* fileName)
 {
 	char temp ;
 	int IC = IcStart, DC = 0;
-	int ICF, DCF;
+	int DCF;
 	lblb bhead;
 	bool succes = T;
 	bhead.head=NULL;
@@ -83,7 +83,6 @@ bool fileProcess(char* fileName)
 if (succes==T)
 	{
 		temp = ' ';
-		ICF = IC;
 		DCF = DC;
 		IC = IcStart;
 		DC = 0;
