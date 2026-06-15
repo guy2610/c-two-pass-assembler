@@ -10,7 +10,7 @@ TEST_INPUT := tests/inputs/progInput
 EXPECTED_OB := tests/expected/progInput.ob
 GENERATED_OB := tests/inputs/progInput.ob
 
-.PHONY: all asan test clean
+.PHONY: all asan test test-asan clean
 
 all: $(TARGET)
 
@@ -22,6 +22,11 @@ asan: $(SOURCES)
 
 test: $(TARGET)
 	./$(TARGET) $(TEST_INPUT)
+	@echo
+	diff -u $(EXPECTED_OB) $(GENERATED_OB)
+
+test-asan: asan
+	./$(ASAN_TARGET) $(TEST_INPUT)
 	@echo
 	diff -u $(EXPECTED_OB) $(GENERATED_OB)
 
