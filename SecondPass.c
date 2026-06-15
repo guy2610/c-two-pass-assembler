@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include "Header.h"
 #include "util.h"
-#include "ScondPass.h"
+#include "SecondPass.h"
 #include "data.h"
 #include "FirstPass.h"
 

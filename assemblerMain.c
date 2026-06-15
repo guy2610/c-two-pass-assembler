@@ -3,7 +3,7 @@
 #include "data.h"
 #include "FirstPass.h"
 #include "label.h"
-#include "ScondPass.h"
+#include "SecondPass.h"
 #define MAX_LABEL_LEN 31
 #define MAX_ARR_LEN 150
 #define WRD_ARR_BITS_LEN 12
