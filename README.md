@@ -1,8 +1,8 @@
 # C Two-Pass Assembler
 
-A C implementation of a two-pass assembler for an assembly-like language, originally developed as part of the Open University Systems Programming Lab.
+A systems-programming project in C implementing a classic two-pass assembler.
 
-The project parses source assembly files, builds a symbol table, encodes instructions and data into machine-word representations, and generates assembler output files such as object, entry, and external symbol files.
+The project parses assembly source files, builds a symbol table, resolves symbol references across two passes, generates object, entry, and external-symbol files, and includes automated regression testing and AddressSanitizer validation.
 
 ## Overview
 
@@ -126,35 +126,42 @@ make clean
 
 This removes local binaries and generated assembler output files.
 
-## Notes
+## Project Evolution
 
-This repository is based on an academic assembler project and was later cleaned up as a portfolio project.
+This project was significantly refactored, debugged, tested, and documented to serve as a standalone portfolio project.
 
-The cleanup included:
+Major improvements include:
 
-- Fixing memory-safety issues found with AddressSanitizer
-- Fixing output mismatches against a golden expected object file
-- Organizing sample input and expected output files
-- Adding a Makefile
-- Adding regression-test targets for object, entry, and external-symbol outputs
-- Removing compiler warnings under `-Wall -Wextra -pedantic`
+- Fixing memory-safety issues discovered with AddressSanitizer
+- Correcting symbol-resolution and output-generation defects
+- Adding regression tests for object, entry, and external-symbol outputs
+- Adding automated build and test workflows through Makefiles
+- Cleaning compiler warnings and improving code quality
+- Reorganizing the repository structure and documentation
 
-## Limitations
+## Engineering Scope
 
-This is an academic assembler implementation and not a production-grade assembler. The focus is on demonstrating parsing, two-pass symbol resolution, output generation, C memory management, and regression testing.
+The goal of this project is to demonstrate:
+
+- Parsing and lexical processing
+- Two-pass assembler design
+- Symbol-table management
+- Binary and hexadecimal encoding
+- C memory management
+- Debugging with AddressSanitizer
+- Regression testing and build automation
+
+The implementation prioritizes educational clarity and maintainability over production-grade assembler features.
 
 ## Current Status
 
-The project currently builds successfully with:
+The project currently:
+
+- Builds successfully with strict compiler warnings enabled
+- Passes golden-output regression tests for `.ob`, `.ent`, and `.ext`
+- Passes AddressSanitizer validation
 
 ```bash
 make test
-```
-
-and passes the golden object-output comparison.
-
-It also passes the AddressSanitizer test target:
-
-```bash
 make test-asan
 ```
