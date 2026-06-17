@@ -7,7 +7,7 @@
 #include "data.h"
 
 
-void data_input_arr(Wrd word_in, int* DC)/*הכנסה למערך נתונים*/
+void data_input_arr(Wrd word_in, int* DC)/*insert word into the data array*/
 {
 
 
